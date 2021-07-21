@@ -12,9 +12,9 @@ using System.IO;
 
 namespace ex5_3
 {
-    public partial class Form1 : Form
+    public partial class frmAuthors : Form
     {
-        public Form1()
+        public frmAuthors()
         {
             InitializeComponent();
         }
@@ -24,7 +24,7 @@ namespace ex5_3
         SqlDataAdapter authorsAdapter;
         DataTable authorsTable;
         CurrencyManager authorsManager;
-        private void frmSQLTester_Load(object sender, EventArgs e)
+        private void frmAuthors_Load(object sender, EventArgs e)
         {
             string path = Path.GetFullPath("SQLBooksDB.mdf");
             // connect to books database
@@ -34,21 +34,21 @@ namespace ex5_3
             booksConnection.Open();
             // establish command object
             authorsCommand = new SqlCommand("Select * from Authors ORDER BY Author", booksConnection);
-            //establish data adapter/data table
+            // establish data adapter/data table
             authorsAdapter = new SqlDataAdapter();
-            auhtorsAdapter.SelectCommand = authorsCommand;
+            authorsAdapter.SelectCommand = authorsCommand;
             authorsTable = new DataTable();
             authorsAdapter.Fill(authorsTable);
             // bind controls to data table
             txtAuthorID.DataBindings.Add("Text", authorsTable, "Au_ID");
             txtAuthorName.DataBindings.Add("Text", authorsTable, "Author");
             txtYearBorn.DataBindings.Add("Text", authorsTable, "Year_Born");
-            // estalish currency managey
+            // estalish currency manager
             authorsManager = (CurrencyManager)
                 this.BindingContext[authorsTable];
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void frmAuthors_FormClosing(object sender, FormClosingEventArgs e)
         {
             // close the connection
             booksConnection.Close();
@@ -59,15 +59,6 @@ namespace ex5_3
             authorsTable.Dispose();
         }
 
-        private void btnPrevious_Click(object sender, EventArgs e)
-        {
-            authorsManager.Position--;
-        }
-
-        private void btnNext_Click(object sender, EventArgs e)
-        {
-            authorsManager.Position++;
-        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -82,6 +73,16 @@ namespace ex5_3
             {
                 return;
             }
+        }
+
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            authorsManager.Position--;
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            authorsManager.Position++;
         }
     }
 }

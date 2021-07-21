@@ -1,7 +1,7 @@
 ﻿
 namespace ex5_3
 {
-    partial class Form1
+    partial class frmAuthors
     {
         /// <summary>
         ///  Required designer variable.
@@ -175,7 +175,7 @@ namespace ex5_3
             this.btnDone.Text = "D&one";
             this.btnDone.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // frmAuthors
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -195,10 +195,10 @@ namespace ex5_3
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Form1";
+            this.Name = "frmAuthors";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Authors";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAuthors_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
