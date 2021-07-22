@@ -31,7 +31,7 @@ namespace ex5_3
             MessageBox.Show(path);
             // connect to books database
             booksConnection = new
-                SqlConnection("Data Source=.\\SQLEXPRESS; AttachDBFilename=" + path + ";" +
+                SqlConnection("Data Source=.\\SQLEXPRESS01; AttachDBFilename=" + path + ";" +
                 "Integrated Security=True; Connect Timeout=30; User Instance=True");
             booksConnection.Open();
             // establish command object
@@ -48,6 +48,8 @@ namespace ex5_3
             // estalish currency manager
             authorsManager = (CurrencyManager)
                 this.BindingContext[authorsTable];
+            this.Show();
+            SetState("View");
         }
 
         private void frmAuthors_FormClosing(object sender, FormClosingEventArgs e)
@@ -62,11 +64,19 @@ namespace ex5_3
         }
         private void btnPrevious_Click(object sender, EventArgs e)
         {
+            if (authorsManager.Position == 0)
+            {
+                Console.Beep();
+            }
             authorsManager.Position--;
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
+            if (authorsManager.Position == authorsManager.Count - 1)
+            {
+                Console.Beep();
+            }
             authorsManager.Position++;
         }
 
@@ -74,6 +84,7 @@ namespace ex5_3
         private void btnSave_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Record saved.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            SetState("View");
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -92,9 +103,50 @@ namespace ex5_3
             {
                 case "View":
                     txtAuthorID.BackColor = Color.White;
+                    txtAuthorID.ForeColor = Color.Black;
+                    txtAuthorName.ReadOnly = true;
+                    txtYearBorn.ReadOnly = true;
+                    btnPrevious.Enabled = true;
+                    btnNext.Enabled = true;
+                    btnAddNew.Enabled = true;
+                    btnSave.Enabled = false;
+                    btnCancel.Enabled = false;
+                    btnEdit.Enabled = true;
+                    btnDelete.Enabled = true;
+                    btnDelete.Enabled = true;
+                    txtAuthorName.Focus();
+                    break;
                 default: // Add or Edit if not View
                     txtAuthorID.BackColor = Color.Red;
+                    txtAuthorID.ForeColor = Color.White;
+                    txtAuthorName.ReadOnly = false;
+                    txtYearBorn.ReadOnly = false;
+                    btnPrevious.Enabled = false;
+                    btnNext.Enabled = false;
+                    btnAddNew.Enabled = false;
+                    btnSave.Enabled = true;
+                    btnCancel.Enabled = true;
+                    btnEdit.Enabled = false;
+                    btnDelete.Enabled = false;
+                    btnDelete.Enabled = false;
+                    txtAuthorName.Focus();
+                    break;
             }
+        }
+
+        private void btnAddNew_Click(object sender, EventArgs e)
+        {
+            SetState("Add");
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            SetState("Edit");
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            SetState("View");
         }
     }
 }
