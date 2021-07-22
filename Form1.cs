@@ -24,12 +24,14 @@ namespace ex5_3
         SqlDataAdapter authorsAdapter;
         DataTable authorsTable;
         CurrencyManager authorsManager;
+ 
         private void frmAuthors_Load(object sender, EventArgs e)
         {
             string path = Path.GetFullPath("SQLBooksDB.mdf");
+            MessageBox.Show(path);
             // connect to books database
             booksConnection = new
-                SqlConnection("Data Source=.\\SQLEXPRESS01; AttachDBFilename=" + path + ";" +
+                SqlConnection("Data Source=.\\SQLEXPRESS; AttachDBFilename=" + path + ";" +
                 "Integrated Security=True; Connect Timeout=30; User Instance=True");
             booksConnection.Open();
             // establish command object
@@ -58,6 +60,15 @@ namespace ex5_3
             authorsAdapter.Dispose();
             authorsTable.Dispose();
         }
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            authorsManager.Position--;
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            authorsManager.Position++;
+        }
 
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -75,14 +86,15 @@ namespace ex5_3
             }
         }
 
-        private void btnPrevious_Click(object sender, EventArgs e)
+        private void SetState(string appState)
         {
-            authorsManager.Position--;
-        }
-
-        private void btnNext_Click(object sender, EventArgs e)
-        {
-            authorsManager.Position++;
+            switch (appState)
+            {
+                case "View":
+                    txtAuthorID.BackColor = Color.White;
+                default: // Add or Edit if not View
+                    txtAuthorID.BackColor = Color.Red;
+            }
         }
     }
 }

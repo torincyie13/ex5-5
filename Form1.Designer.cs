@@ -199,6 +199,7 @@ namespace ex5_3
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Authors";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAuthors_FormClosing);
+            this.Load += new System.EventHandler(this.frmAuthors_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
