@@ -148,6 +148,20 @@ namespace ex5_3
         {
             SetState("View");
         }
+
+        private void txtYearBorn_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= '0' && e.KeyChar <= '9') || (int) e.KeyChar == 8)
+            {
+                // Acceptable keystrokes
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+                Console.Beep();
+            }
+        }
     }
 }
 

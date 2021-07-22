@@ -89,6 +89,7 @@ namespace ex5_3
             this.txtYearBorn.ReadOnly = true;
             this.txtYearBorn.Size = new System.Drawing.Size(130, 23);
             this.txtYearBorn.TabIndex = 4;
+            this.txtYearBorn.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtYearBorn_KeyPress);
             // 
             // txtAuthorName
             // 
