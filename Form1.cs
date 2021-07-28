@@ -31,7 +31,7 @@ namespace ex5_3
             MessageBox.Show(path);
             // connect to books database
             booksConnection = new
-                SqlConnection("Data Source=.\\SQLEXPRESS01; AttachDBFilename=" + path + ";" +
+                SqlConnection("Data Source=.\\SQLEXPRESS; AttachDBFilename=" + path + ";" +
                 "Integrated Security=True; Connect Timeout=30; User Instance=True");
             booksConnection.Open();
             // establish command object
